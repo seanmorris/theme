@@ -157,8 +157,6 @@ class FoozleView extends FooView
 
 ## Contextualized Themeing
 
-!!! NEED TO REMOVE REFERENCE TO IDS\META CLASS !!!
-
 By defining mappings from classes to views in the $contextViews array, you can specify that a view should be rendered differently when the render call is made from certain classes.
 
 ```php
