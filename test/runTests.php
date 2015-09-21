@@ -8,8 +8,15 @@ $testClasses = [
 	, 'SeanMorris\Theme\Test\ViewTest'
 ];
 
+$return = 0;
+
 foreach($testClasses as $testClass)
 {
 	$test = new $testClass;
-	$test->run(new \TextReporter());	
+	if(!$test->run(new \TextReporter()))
+	{
+		$return = 1;
+	}
 }
+
+return $return;

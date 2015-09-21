@@ -9,7 +9,7 @@ The aim of the Theme library is to provide a start separation of presentation fr
 
 ## Templating
 
-Couping the template with the View class is very simple. Simply subclass the provided View and append the template after a call to __halt_compiler() like so:
+Coupling the template with the View class is very simple. Simply subclass the provided View and append the template after a call to __halt_compiler() like so:
 
 ```php
 <?php
@@ -69,7 +69,7 @@ echo $view;
 
 ## Theming
 
-Creating a theme is as simple as extending the Theme class and providing a mapping from your objects to their views, as shown:
+Creating a theme is as simple as extending the theme class and providing a mapping from your object classes to their view classes, as shown:
 
 ```php
 <?php
@@ -92,7 +92,7 @@ Usage:
 
 ## Wrapping
 
-If you've got a default "trim" you'd like to define to wrap everything (i.e. the view that contains your <html> <head>, and <body> structure), simply set the static property $wrap an array listing your wrappers, innermost to outtermost.
+If you've got a default "trim" you'd like to use to wrap everything (i.e. the view that contains your <html> <head>, and <body> structure), simply set the static property $wrap to an array listing your wrappers, innermost to outtermost.
 
 ```php
 <?php
@@ -122,7 +122,7 @@ Although the library doesn't do much, its got some power under the hood.
 
 ## Fallback Themes
 
-If a theme cannot render an object, it can defer the rendering to other Themes that can. This is done by specifying the $themes static property. The list will be check in order, until a theme is able to render a given object.
+If a theme cannot render an object, it can defer the rendering to other themes that can. This is done by specifying the $themes static property. The list will be check in order, until a theme is able to render a given object.
 
 ```php
 <?php
@@ -140,7 +140,7 @@ class Theme extends \SeanMorris\Theme\Theme
 
 ## Subclassing Views
 
-You can subclass any other view class and keep the template by ommitting the call to __halt_compiler(), and simply extending the existing view. You'll probably want to override the parent preprocessor as well.
+You can subclass any view class and keep the template by ommitting the call to __halt_compiler(), and extending the existing view. You'll probably want to override the parent preprocessor as well.
 
 ```php
 <?php
