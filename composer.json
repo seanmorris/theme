@@ -1,0 +1,20 @@
+{
+    "name": "seanmorris/theme",
+    "description": "Simple, sane templating and theming for PHP",
+    "authors": [
+        {
+            "name": "Sean Morris",
+            "email": "sean@sean-morris.com"
+        }
+    ],
+    "require-dev": {
+        "simpletest/simpletest": "dev-master"
+    },
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "SeanMorris\\Theme\\Test\\": "test/",
+            "SeanMorris\\Theme\\": "source/"
+        }
+    }
+}
