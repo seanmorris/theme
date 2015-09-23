@@ -69,9 +69,9 @@ class Theme
 		{
 			$next = NULL;
 
-			if(!isset($level['object']) && isset($level['class']))
+			if(isset($level['object']))
 			{
-				$next = $level['class'];
+				$next = get_class($level['object']);
 			}
 			elseif(isset($level['class']))
 			{
@@ -87,13 +87,15 @@ class Theme
 
 			if($next)
 			{
-				$objectStack[] = $next;
+				$classStack[] = $next;
 			}
 		}
 
+		var_dump($classStack);
+
 		$viewListList = [static::$view];
 
-		foreach($objectStack as $superObject)
+		foreach($classStack as $superObject)
 		{
 			if($superObject instanceof \SeanMorris\Ids\Router)
 			{
