@@ -91,8 +91,6 @@ class Theme
 			}
 		}
 
-		var_dump($classStack);
-
 		$viewListList = [static::$view];
 
 		foreach($classStack as $superObject)
