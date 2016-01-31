@@ -21,10 +21,24 @@ class View
 		
 	}
 
-	public function render($vars = [])
+	public function render($vars = [], $asc = 0)
 	{
 		$vars = $this->vars + $vars;
 		$className = get_called_class();
+
+		while($asc > 0)
+		{
+			$parentClass = get_parent_class($className);
+
+			if(!$parentClass)
+			{
+				break;
+			}
+
+			$className = $parentClass;
+
+			$asc--;
+		}
 
 		do {
 			$reflection = new \ReflectionClass($className);
@@ -66,7 +80,14 @@ class View
 			}
 			catch(\Exception $e)
 			{
-				error_log('Exception thrown in template: ' . $classFile . ':' . $e->getLine());
+				error_log(
+					'Exception thrown in template: '
+						. $classFile
+						. ':'
+						. $e->getLine()
+						. PHP_EOL
+						. print_r($e, 1)
+				);
 				throw $e;
 			}
 
