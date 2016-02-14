@@ -168,9 +168,9 @@ class Theme extends \SeanMorris\Theme\Theme
       'SeanMorris\Stuff\RandomObject' => [
         'SeanMorris\Stuff\Foo' => 'SeanMorris\Theme\FooAlternateView'
       ]
-      , $view = [
-        'SeanMorris\Stuff\Foo' => 'SeanMorris\Theme\FooView'
-      ]
+    ]
+    , $view = [
+      'SeanMorris\Stuff\Foo' => 'SeanMorris\Theme\FooView'
     ]
   ;
 }
