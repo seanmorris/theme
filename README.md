@@ -1,5 +1,7 @@
 # SeanMorris\Theme
 
+[![Build Status](https://travis-ci.org/seanmorris/theme.svg?branch=master)](https://travis-ci.org/seanmorris/theme)
+
 ## Simple, sane templating and theming for PHP
 
 The aim of the Theme library is to provide a start separation of presentation from logic. It has only two responsibilities:
