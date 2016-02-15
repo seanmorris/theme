@@ -2,7 +2,9 @@
 namespace SeanMorris\Theme;
 class View
 {
-	protected $vars = [];
+	protected
+	$haltLine  = 0
+	, $vars    = [];
 
 	public function __construct($vars = [])
 	{
@@ -46,10 +48,20 @@ class View
 
 			$fileContent = file_get_contents($classFile);
 			$tokens = token_get_all($fileContent);
+			$hasHalt = FALSE;
 
-			$hasHalt = (bool)array_filter($tokens, function($token){
-				return isset($token[0]) && $token[0] == T_HALT_COMPILER;
-			});
+			foreach($tokens as $token)
+			{
+				if(is_array($token)
+					&& isset($token[0], $token[2])
+				) {
+					if($token[0] == T_HALT_COMPILER)
+					{
+						$hasHalt = TRUE;
+						$this->haltLine = $token[2] - 1;
+					}
+				}
+			}
 
 			if($hasHalt)
 			{
@@ -84,10 +96,11 @@ class View
 					'Exception thrown in template: '
 						. $classFile
 						. ':'
-						. $e->getLine()
+						. ($e->getLine() + $this->haltLine)
 						. PHP_EOL
-						. print_r($e, 1)
+						. $e->getMessage()
 				);
+				
 				throw $e;
 			}
 
@@ -105,7 +118,7 @@ class View
 		try{
 			$result = $this->render();
 		} catch (\Exception $e) {
-			error_log(print_r($e));
+			error_log($e->getTraceAsString());
 			$result = '!!!';
 		}
 

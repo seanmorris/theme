@@ -34,14 +34,20 @@ class FooView extends \SeanMorris\Theme\View
 {
 }
 __halt_compiler(); ?>
-<p>This is a FooView--<?=$a;?>--<?=$b;?>--<?=$c;?></p>
+<h1>FooView</h1>
+<span class = "some_class"><?=$a;?></span>
+<p><?=$b;?>. <b><?=$c;?></b></p>
 ```
 
-Usage of this view would work as such:
+Pass an associative array into the constructor to populate the variables in the template. The keys of the array will be translated to variable names. 
 
 ```php
 <?php
-$view = new FooView(['a' => 1, 'b' => 2, 'c' => 3]);
+$view = new FooView([
+  'a' => 'value'
+  , 'b' => 'value'
+  , 'c' => 'value'
+]);
 
 echo $view;
 ```
@@ -56,23 +62,28 @@ class FooView extends \SeanMorris\Theme\View
 {
   public function preprocess(&$vars)
   {
-    $vars['a'] = $vars['object']->a;
-    $vars['b'] = $vars['object']->b;
-    $vars['c'] = $vars['object']->c;
+    $vars['a'] = $vars['a'] . '...';
+    $vars['b'] = $vars['b'] . '?';
+    $vars['c'] = $vars['b'] . '!'
   }
 }
 __halt_compiler(); ?>
-<p>FooView--<?=$a;?>--<?=$b;?>--<?=$c;?></p>
+<h1>FooView</h1>
+<span class = "some_class"><?=$a;?></span>
+<p><?=$b;?>. <b><?=$c;?></b></p>
 ```
 
 Usage:
 
 ```php
 <?php
-$view = new FooView(['object' => new Foo()]);
+$view = new FooView([
+  'a' => 'value'
+  , 'b' => 'value'
+  , 'c' => 'value'
+]);
 
 echo $view;
-
 ```
 
 ## Theming
