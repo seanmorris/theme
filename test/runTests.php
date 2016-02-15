@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 chdir(__DIR__);
 
@@ -13,7 +14,7 @@ $return = 0;
 foreach($testClasses as $testClass)
 {
 	$test = new $testClass;
-	
+
 	if(!$test->run(new \TextReporter()))
 	{
 		$return = 1;
