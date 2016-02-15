@@ -1,15 +1,13 @@
 # SeanMorris\Theme
 
+[![Build Status](https://travis-ci.org/seanmorris/theme.svg?branch=master)](https://travis-ci.org/seanmorris/theme) [![Latest Stable Version](https://poser.pugx.org/seanmorris/theme/v/stable)](https://packagist.org/packages/seanmorris/theme) [![Total Downloads](https://poser.pugx.org/seanmorris/theme/downloads)](https://packagist.org/packages/seanmorris/theme) [![Latest Unstable Version](https://poser.pugx.org/seanmorris/theme/v/unstable)](https://packagist.org/packages/seanmorris/theme) [![License](https://poser.pugx.org/seanmorris/theme/license)](https://packagist.org/packages/seanmorris/theme)
+
 ## Simple, sane templating and theming for PHP
 
 The aim of the Theme library is to provide a start separation of presentation from logic. It has only two responsibilities:
 
 * Mapping objects to Views
 * Rendering those Views
-
-Travis Continuous Integration Build Status:
-
-[![Build Status](https://travis-ci.org/seanmorris/theme.svg?branch=master)](https://travis-ci.org/seanmorris/theme)
 
 ## Composer
 
