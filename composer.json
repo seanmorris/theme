@@ -7,6 +7,7 @@
             "email": "sean@sean-morris.com"
         }
     ],
+    "php": ">=5.4",
     "require-dev": {
         "simpletest/simpletest": "dev-master"
     },
