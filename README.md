@@ -11,18 +11,20 @@ The aim of the Theme library is to provide a start separation of presentation fr
 
 ## Composer
 
-Simply add `"seanmorris/theme": "1.0.0"` to the `require` array in your project's composer.json.
+Just run `composer require seanmorris/theme` in your project directory.
+
+You can also add `"seanmorris/theme": "^1.0.0"` to the `require` array in your project's composer.json.
 
 ```json
 "require": {
-  "seanmorris/theme": "1.0.0"
+  "seanmorris/theme": "^1.0.0"
 }
 ```
 
 
 ## Templating
 
-Coupling the template with the View class is very simple. Simply subclass the provided View and append the template after a call to __halt_compiler() like so:
+Coupling the template with the View class is very simple. Simply subclass the provided View and append the template after a call to `__halt_compiler();` (WITH THE CLOSING `?>`) like so:
 
 (note: Short tags are enabled for simple echo statements as of PHP 5.4, but are not required)
 
@@ -31,8 +33,7 @@ Coupling the template with the View class is very simple. Simply subclass the pr
 class FooView extends \SeanMorris\Theme\View
 {
 }
-__halt_compiler();
-?>
+__halt_compiler(); ?>
 <p>This is a FooView--<?=$a;?>--<?=$b;?>--<?=$c;?></p>
 ```
 
@@ -40,14 +41,9 @@ Usage of this view would work as such:
 
 ```php
 <?php
-$view = new FooView([
-  'a' => 1
-  , 'b' => 2
-  , 'c' => 3
-]);
+$view = new FooView(['a' => 1, 'b' => 2, 'c' => 3]);
 
 echo $view;
-?>
 ```
 
 ## Preprocessing
@@ -65,8 +61,7 @@ class FooView extends \SeanMorris\Theme\View
     $vars['c'] = $vars['object']->c;
   }
 }
-__halt_compiler();
-?>
+__halt_compiler(); ?>
 <p>FooView--<?=$a;?>--<?=$b;?>--<?=$c;?></p>
 ```
 
@@ -74,12 +69,10 @@ Usage:
 
 ```php
 <?php
-$view = new FooView([
-  'object' => new Foo
-]);
+$view = new FooView(['object' => new Foo()]);
 
 echo $view;
-?>
+
 ```
 
 ## Theming
@@ -91,12 +84,10 @@ Creating a theme is as simple as extending the theme class and providing a mappi
 class Theme extends \SeanMorris\Theme\Theme
 {
   protected static
-    $view = [
-      'SeanMorris\Foo' => 'SeanMorris\Theme\FooView'
-    ]
-  ;
+  $view = [
+    'SeanMorris\Foo' => 'SeanMorris\Theme\FooView'
+  ];
 }
-?>
 ```
 
 Usage:
@@ -114,13 +105,11 @@ If you've got a default "trim" you'd like to use to wrap everything (i.e. the vi
 class Theme extends \SeanMorris\Theme\Theme
 {
   protected static
-    $wrap = [
-      'SeanMorris\Theme\Wrapper'
-      , 'SeanMorris\Theme\HtmlDocument' 
-    ];
-  ;
+  $wrap = [
+    'SeanMorris\Theme\Wrapper'
+    , 'SeanMorris\Theme\HtmlDocument' 
+  ];
 }
-?>
 ```
 Usage:
 
@@ -128,7 +117,6 @@ Usage:
 <?php
 $bodyText = 'Lorem ipsum dolor sit amet...';
 echo Theme::wrap($bodyText);
-?>
 ```
 
 ## Advanced Stuff...
@@ -144,13 +132,11 @@ If a theme cannot render an object, it can defer the rendering to other themes t
 class Theme extends \SeanMorris\Theme\Theme
 {
   protected static
-    $themes = [
-      'SeanMorris\SomeTheme\Theme'
-      , 'SeanMorris\SomeOtherTheme\Theme'
-    ]
-  ;
+  $themes = [
+    'SeanMorris\SomeTheme\Theme'
+    , 'SeanMorris\SomeOtherTheme\Theme'
+  ];
 }
-?>
 ```
 
 ## Subclassing Views
@@ -167,29 +153,26 @@ class FoozleView extends FooView
     $vars['a'] = $vars['object']->a . 'DIFFERENT!!!';
   }
 }
-?>
 ```
 
 ## Contextualized Themeing
 
 By defining mappings from classes to views in the $contextViews array, you can specify that a view should be rendered differently when the render call is made from certain classes.
 
+In this example `SeanMorris\Stuff\Foo` will be rendered with the `SeanMorris\Theme\FooAlternateView` class when rendered inside of the `SeanMorris\Stuff\RandomObject` class, but outside, it will be rendered with `SeanMorris\Theme\FooView`.
+
 ```php
 <?php
 class Theme extends \SeanMorris\Theme\Theme
 {
   protected static
-    $contextView = [
-      'SeanMorris\Stuff\RandomObject' => [
-        'SeanMorris\Stuff\Foo' => 'SeanMorris\Theme\FooAlternateView'
-      ]
+  $contextView = [
+    'SeanMorris\Stuff\RandomObject' => [
+      'SeanMorris\Stuff\Foo' => 'SeanMorris\Theme\FooAlternateView'
     ]
-    , $view = [
-      'SeanMorris\Stuff\Foo' => 'SeanMorris\Theme\FooView'
-    ]
-  ;
+  ]
+  , $view = [
+    'SeanMorris\Stuff\Foo' => 'SeanMorris\Theme\FooView'
+  ];
 }
-?>
 ```
-
-Now SeanMorris\Stuff\Foo will be rendered with the SeanMorris\Theme\FooAlternateView class when rendered inside of the SeanMorris\Stuff\RandomObject class, but outside, it will be rendered with SeanMorris\Theme\FooView.
