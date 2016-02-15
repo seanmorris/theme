@@ -163,7 +163,7 @@ class FoozleView extends FooView
 {
   public function preprocess(&$vars)
   {
-    parent::preprocess();
+    parent::preprocess($vars);
     $vars['a'] = $vars['object']->a . 'DIFFERENT!!!';
   }
 }
