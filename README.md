@@ -1,7 +1,5 @@
 # SeanMorris\Theme
 
-[![Build Status](https://travis-ci.org/seanmorris/theme.svg?branch=master)](https://travis-ci.org/seanmorris/theme)
-
 ## Simple, sane templating and theming for PHP
 
 The aim of the Theme library is to provide a start separation of presentation from logic. It has only two responsibilities:
@@ -9,9 +7,26 @@ The aim of the Theme library is to provide a start separation of presentation fr
 * Mapping objects to Views
 * Rendering those Views
 
+Travis Continuous Integration Build Status:
+
+[![Build Status](https://travis-ci.org/seanmorris/theme.svg?branch=master)](https://travis-ci.org/seanmorris/theme)
+
+## Composer
+
+Simply add `"seanmorris/theme": "1.0.0"` to the `require` array in your project's composer.json.
+
+```json
+"require": {
+  "seanmorris/theme": "1.0.0"
+}
+```
+
+
 ## Templating
 
 Coupling the template with the View class is very simple. Simply subclass the provided View and append the template after a call to __halt_compiler() like so:
+
+(note: Short tags are enabled for simple echo statements as of PHP 5.4, but are not required)
 
 ```php
 <?php
@@ -20,7 +35,7 @@ class FooView extends \SeanMorris\Theme\View
 }
 __halt_compiler();
 ?>
-<p>FooView--<?=$a;?>--<?=$b;?>--<?=$c;?></p>
+<p>This is a FooView--<?=$a;?>--<?=$b;?>--<?=$c;?></p>
 ```
 
 Usage of this view would work as such:
