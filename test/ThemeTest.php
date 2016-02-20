@@ -1,6 +1,6 @@
 <?php
 namespace SeanMorris\Theme\Test;
-class ThemeTest extends \UnitTestCase
+class ThemeTest extends HtmlTestCase
 {
 	public function testRender()
 	{
