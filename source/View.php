@@ -1,16 +1,38 @@
 <?php
 namespace SeanMorris\Theme;
-class View
+/**
+ * The View class maps preprocessing logic to templates.
+ * 
+ * @package SeanMorris\Theme
+ */
+abstract class View
 {
-	protected
-	$haltLine  = 0
-	, $vars    = [];
+	/**
+	 * Line number where __halt_compiler() appears.
+	 * @var array
+	 */
+	protected $haltLine  = 0;
+	/**
+	 * Variables for template.
+	 * @var array
+	 */
+	protected $vars      = [];
 
+	/**
+	 * Sets up view object, consumes variables for template.
+	 * 
+	 * @param array $vars Variables for template.
+	 */
 	public function __construct($vars = [])
 	{
 		$this->update($vars);
 	}
 
+	/**
+	 * Updates variables for template.
+	 * 
+	 * @param array $vars Variables for template.
+	 */
 	public function update($vars)
 	{
 		$this->vars = $vars + $this->vars;
@@ -18,11 +40,24 @@ class View
 		$this->preprocess($this->vars);
 	}
 
+	/**
+	 * Preprocess variables for template, before render.
+	 * 
+	 * @param array $vars Variables for template.
+	 */
 	protected function preprocess(&$vars)
 	{
 		
 	}
 
+	/**
+	 * Render self to string for display.
+	 * 
+	 * @param array $vars Variables for template.
+	 * @param int $asc Max number of classes to ascend when looking for template.
+	 * 
+	 * @return string Rendered view.
+	 */
 	public function render($vars = [], $asc = 0)
 	{
 		$vars = $this->vars + $vars;
@@ -113,6 +148,12 @@ class View
 		return $renderScope();
 	}
 
+	/**
+	 * Renders the view.
+	 * Absorbs and logs any errors during the render process.
+	 * 
+	 * @return string Rendered view.
+	 */
 	public function __toString()
 	{
 		try{

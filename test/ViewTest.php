@@ -1,6 +1,9 @@
 <?php
+/**
+ * @package SeanMorris\Theme\Test
+ */
 namespace SeanMorris\Theme\Test;
-class ViewTest extends \UnitTestCase
+class ViewTest extends HtmlTestCase
 {
 	public function testRender()
 	{

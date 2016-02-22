@@ -1,4 +1,7 @@
 <?php
+/**
+ * @package SeanMorris\Theme\Test
+ */
 namespace SeanMorris\Theme\Test\OtherTestTheme;
 class Theme extends \SeanMorris\Theme\Theme
 {
