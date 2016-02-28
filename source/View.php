@@ -117,35 +117,51 @@ abstract class View
 
 		} while(!$hasHalt);
 
-		$renderScope = function() use($template, $vars, $classFile)
-		{
-			extract($vars);
-			ob_start();
-
-			try{
-				eval($template);
-			}
-			catch(\Exception $e)
+		$renderScope = \Closure::Bind(
+			function() use($template, $vars, $classFile)
 			{
-				error_log(
-					'Exception thrown in template: '
-						. $classFile
-						. ':'
-						. ($e->getLine() + $this->haltLine)
-						. PHP_EOL
-						. $e->getMessage()
-				);
-				
-				throw $e;
+				extract($vars);
+				ob_start();
+
+				try{
+					eval($template);
+				}
+				catch(\Exception $e)
+				{
+					error_log(
+						'Exception thrown in template: '
+							. $classFile
+							. ':'
+							. ($e->getLine() + $this->haltLine)
+							. PHP_EOL
+							. $e->getMessage()
+					);
+
+					throw $e;
+				}
+
+				$content = ob_get_contents();
+				ob_end_clean();
+
+				return $content;
 			}
+			, $this
+			, get_called_class()
+		);
 
-			$content = ob_get_contents();
-			ob_end_clean();
+		$result = $renderScope();
 
-			return $content;
-		};
+		if(isset($vars['__debug']) && $vars['__debug'])
+		{
+			$result = sprintf(
+				"<!-- START %s -->\n%s\n<!-- END %s --->"
+				, get_called_class()
+				, $result
+				, get_called_class()
+			);
+		}
 
-		return $renderScope();
+		return $result;
 	}
 
 	/**
