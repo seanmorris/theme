@@ -51,7 +51,7 @@ class HtmlTestCase extends \UnitTestCase
 
 		if ($nodes->length)
 		{
-			$attrVal = $nodes[0]->getAttribute($attr);
+			$attrVal = $nodes->item(0)->getAttribute($attr);
 		}
 
 		return $attrVal;
