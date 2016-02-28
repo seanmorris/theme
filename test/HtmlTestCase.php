@@ -64,7 +64,7 @@ class HtmlTestCase extends \UnitTestCase
 
 		if ($nodes->length)
 		{
-			$text = $nodes[0]->textContent;
+			$text = $nodes->item(0)->textContent;
 		}
 
 		if($flatten)
