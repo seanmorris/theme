@@ -286,7 +286,7 @@ abstract class Theme
 	 * 
 	 * @return object Wrap view with body.
 	 */
-	public static function wrap($body)
+	public static function wrap($body, $vars = [])
 	{
 		if(isset(static::$wrap))
 		{
@@ -297,9 +297,7 @@ abstract class Theme
 
 			foreach(static::$wrap as $wrapper)
 			{
-				$body = new $wrapper([
-					'body' => $body
-				]);	
+				$body = new $wrapper(['body' => $body] + $vars);
 			}
 		}
 
