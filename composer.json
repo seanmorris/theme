@@ -1,5 +1,6 @@
 {
     "name": "seanmorris/theme",
+    "version": "1.0.8",
     "description": "Simple, sane templating and theming for PHP",
     "authors": [
         {
