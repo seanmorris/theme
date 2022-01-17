@@ -8,8 +8,8 @@ class HtmlTestCase extends \UnitTestCase
 	protected function xpathQuery($html, $xpath)
 	{
 		$dom = new \DomDocument;
-		$dom->loadHtml($html);
-		$domXpath = new \DomXPath($dom, LIBXML_NOERROR);
+		$dom->loadHtml($html, LIBXML_NOERROR);
+		$domXpath = new \DomXPath($dom);
 		return $domXpath->query($xpath);
 	}
 
