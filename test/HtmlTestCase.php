@@ -9,7 +9,7 @@ class HtmlTestCase extends \UnitTestCase
 	{
 		$dom = new \DomDocument;
 		$dom->loadHtml($html);
-		$domXpath = new \DomXPath($dom);
+		$domXpath = new \DomXPath($dom, LIBXML_NOERROR);
 		return $domXpath->query($xpath);
 	}
 
